@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { useSettings } from './SettingsContext';
+import { generateResponse } from '../services/manasEngine';
 
 export type AgentType = 'general' | 'study' | 'coding' | 'task' | 'file' | 'web' | 'automation';
 
@@ -119,202 +120,7 @@ export const ChatProvider: React.FC<{ children: React.ReactNode }> = ({ children
     setActiveConversationId(null);
   };
 
-  // Generate simulated AI responses based on agent type and text input
-  const generateSimulatedResponse = (text: string, agent: AgentType): { text: string; memoryUsed?: string } => {
-    const lowerText = text.toLowerCase();
-    let reply = "";
-    let memoryUsed = undefined;
-
-    if (settings.memoryEnabled) {
-      memoryUsed = "Manas Brain Engine recalled user preference: 'Interested in advanced automation, agent systems, and rust/typescript programming.'";
-    }
-
-    switch (agent) {
-      case 'study':
-        if (lowerText.includes('react') || lowerText.includes('component')) {
-          reply = `### Study Track: React Architecture ⚛️
-
-To truly master component patterns, let's break this down into three major zones:
-
-1. **State Management Flow**: Understand the unidirectional data flow.
-2. **Side Effect Synchronization**: \`useEffect\` hooks and cleanups.
-3. **Component Reusability**: Compound component patterns.
-
-**Recommended Flashcards to create:**
-- *What is the Virtual DOM?* A lightweight programming representation of HTML DOM in memory.
-- *Explain reconciliation:* React's diffing algorithm to update only elements that changed.
-
-Would you like me to construct a 5-day study plan covering React hooks and contexts?`;
-        } else {
-          reply = `### Comprehensive Syllabus Blueprint 📝
-
-Let's systematically organize learning about: **"${text}"**.
-
-Here is a quick concept hierarchy:
-- **Foundational level**: Basic definitions, paradigms, and syntax rules.
-- **Intermediate level**: Core implementation structures, typical traps, and debug heuristics.
-- **Advanced tier**: Design patterns, performant execution profiles, and agent-driven optimizations.
-
-**Quick Mastery Tip:** Write short summaries in your own words. Try teaching the concept back to me, and I will highlight areas to polish!`;
-        }
-        break;
-
-      case 'coding':
-        if (lowerText.includes('button') || lowerText.includes('css')) {
-          reply = `Here is a modern, glassmorphic button component styled with **Tailwind CSS**. It incorporates hover animations and glow filters:
-
-\`\`\`tsx
-import React from 'react';
-
-interface GlassButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  glowColor?: 'cyan' | 'purple';
-}
-
-export const GlassButton: React.FC<GlassButtonProps> = ({ 
-  children, 
-  glowColor = 'cyan', 
-  className = '', 
-  ...props 
-}) => {
-  const glowStyle = glowColor === 'cyan' 
-    ? 'hover:shadow-[0_0_20px_rgba(6,182,212,0.4)] hover:border-cyan-400' 
-    : 'hover:shadow-[0_0_20px_rgba(139,92,246,0.4)] hover:border-violet-400';
-
-  return (
-    <button
-      className={\`px-6 py-2.5 rounded-xl border border-white/10 bg-slate-900/60 backdrop-blur-md text-white font-medium transition-all duration-300 hover:-translate-y-0.5 active:translate-y-0 \${glowStyle} \${className}\`}
-      {...props}
-    >
-      {children}
-    </button>
-  );
-};
-\`\`\`
-
-**Key Features:**
-- Dynamic shadow overlays triggered on hover.
-- Glassmorphic transparency support.
-- Fully compatible with standard React buttons.`;
-        } else {
-          reply = `### Script Template & Algorithm Design 💻
-
-I have generated a clean implementation matching your query:
-
-\`\`\`typescript
-// Algorithmic optimization for: "${text}"
-function processAgentWorkflow<T>(pipeline: T[]): { processed: T[]; status: string } {
-  console.log("Manas Engine orchestrating agent operations...");
-  const processed = pipeline.filter(Boolean);
-  
-  return {
-    processed,
-    status: "Success: Foundation Node Synced"
-  };
-}
-
-// Sample call
-const result = processAgentWorkflow(["Authentication", "Dashboard", "ChatUI"]);
-console.log(result);
-\`\`\`
-
-*Optimized under O(N) complexity constraints. Feel free to tweak, and let me know if you get compile warnings!*`;
-        }
-        break;
-
-      case 'task':
-        reply = `### Checklist & Action Timelines 📋
-
-Here is a curated planner breakdown of: **"${text}"**. I've organized this into high, medium, and low priority phases:
-
-| Priority | Task Description | Est. Time | Status |
-| :--- | :--- | :--- | :---: |
-| 🔴 **High** | Scaffolding validation & CSS setup | 1 hr | Completed |
-| 🟡 **Medium**| Auth/Chat pages integration | 3 hrs | In Progress |
-| 🟢 **Low** | Settings brain override testing | 2 hrs | Scheduled |
-
-**Immediate micro-habits:**
-- [x] Create clean TS models
-- [ ] Connect custom UI links inside \`Sidebar\`
-- [ ] Reset database mocks to zero test entries
-
-Shall I schedule a calendar timer to alert you when tasks expire?`;
-        break;
-
-      case 'file':
-        reply = `### Semantic Document Breakdown 📄
-
-*Simulation: Reading target workspace files...*
-- **File Checked**: virtual_knowledge_index.bin
-- **Context Matches**: 4 sections
-- **Main Theme**: ${text || 'System Specifications'}
-
-**Identified Concepts:**
-1. **Core Brain Node**: High cohesion between semantic embeddings and chat records.
-2. **Safety Gates**: Multi-layered sanitization rules prevents leaking raw shell execution details.
-3. **Agent Delegation**: Clean callback handshakes.
-
-*I have saved this summary as a transient context layer. You can ask follow-up questions from this file context directly!*`;
-        break;
-
-      case 'web':
-        reply = `### Web Indexing Results & Bibliography 🌐
-
-*Simulated Crawler executing index lookup for: "${text}"*
-
-1. **Vite official documentation** (Score: 0.98)
-   - *Snippet*: Vite uses ES Modules to load local scripts instantly.
-   - *Link*: [vite.dev](https://vite.dev)
-
-2. **Tailwind CSS Utility Best Practices** (Score: 0.89)
-   - *Snippet*: Harnessing JIT compile ensures negligible stylesheet size in production.
-   - *Link*: [tailwindcss.com](https://tailwindcss.com)
-
-3. **MDN Web Docs on Web Storage APIs** (Score: 0.82)
-   - *Snippet*: LocalStorage is persistent, synchronous, and capped at roughly 5MB.
-   - *Link*: [developer.mozilla.org](https://developer.mozilla.org)
-
-*Let me know if I should expand search criteria or fetch raw content from any specific link!*`;
-        break;
-
-      case 'automation':
-        reply = `### Proactive Workflow Pipeline ⚙️
-
-Here is a simulated script orchestration that automates **"${text}"** under event triggers:
-
-**Event Trigger Sequence:**
-\`\`\`txt
-[Event: User submits prompt]
-       │
-       ▼
-[Manas Engine decodes intent] ──► [Memory Context Injected]
-                                             │
-                                             ▼
-[Automation Rule Fired] ──► [Launch Task Agent + Send notification]
-\`\`\`
-
-**Automation Status:**
-- Rule Status: **Active**
-- Total Runs: **14 runs**
-- Latency: **42ms (Internal Mock Engine)**
-
-Would you like me to bind a keyboard macro or custom slash command shortcut to trigger this system routine?`;
-        break;
-
-      default:
-        // general agent
-        reply = `I have received your request regarding: **"${text}"**. 
-
-As **Saarthi AI**, I am always active to support your workflow. Under Phase 1 foundations, all specialized helper models (Study, Coding, Task, File, Web, and Automation) are available to run. 
-
-You can toggle between them using the **Agent Bar** on the left. If you need coding assist, switch to the **Coding Agent**! If you want visual lists, the **Task Agent** is custom built for checklists.
-
-Manas Memory Engine Status: ${settings.memoryEnabled ? 'Active' : 'Disabled'}
-Let me know how you'd like to proceed!`;
-        break;
-    }
-
-    return { text: reply, memoryUsed };
-  };
+  // Removed legacy generateSimulatedResponse since it is now centralized inside manasEngine.ts
 
   const sendMessage = async (text: string) => {
     if (!text.trim() || isGenerating) return;
@@ -353,33 +159,37 @@ Let me know how you'd like to proceed!`;
     // Start AI Response Generation
     setIsGenerating(true);
 
-    // Simulated network + cognitive engine delay
-    await new Promise((resolve) => setTimeout(resolve, 1200));
+    try {
+      // Execute Manas Engine Generation directly, which automatically handles real API or mock fallbacks
+      const engineResult = await generateResponse(text, updatedConv.messages, activeAgent, settings);
+      
+      const aiMessage: Message = {
+        id: Math.random().toString(36).substring(2, 9),
+        sender: 'ai',
+        text: engineResult.text,
+        timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+        agent: activeAgent,
+        retrievedMemory: engineResult.memoryUsed,
+      };
 
-    const simulated = generateSimulatedResponse(text, activeAgent);
-    const aiMessage: Message = {
-      id: Math.random().toString(36).substring(2, 9),
-      sender: 'ai',
-      text: simulated.text,
-      timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-      agent: activeAgent,
-      retrievedMemory: simulated.memoryUsed,
-    };
+      // Reload conversation to avoid stale modifications during async wait
+      const freshConversations = JSON.parse(localStorage.getItem('saarthi_conversations') || '[]') as Conversation[];
+      const freshConv = freshConversations.find((c) => c.id === convId) || updatedConv;
 
-    // Reload conversation to avoid stale modifications during async wait
-    const freshConversations = JSON.parse(localStorage.getItem('saarthi_conversations') || '[]') as Conversation[];
-    const freshConv = freshConversations.find((c) => c.id === convId) || updatedConv;
+      const finalMessages = [...freshConv.messages, aiMessage];
+      const finalConv = {
+        ...freshConv,
+        messages: finalMessages,
+        updatedAt: new Date().toISOString(),
+      };
 
-    const finalMessages = [...freshConv.messages, aiMessage];
-    const finalConv = {
-      ...freshConv,
-      messages: finalMessages,
-      updatedAt: new Date().toISOString(),
-    };
-
-    const finalConversations = freshConversations.map((c) => (c.id === convId ? finalConv : c));
-    saveConversations([finalConv, ...finalConversations.filter((c) => c.id !== convId)]);
-    setIsGenerating(false);
+      const finalConversations = freshConversations.map((c) => (c.id === convId ? finalConv : c));
+      saveConversations([finalConv, ...finalConversations.filter((c) => c.id !== convId)]);
+    } catch (err) {
+      console.error('Critical messaging error in ChatContext:', err);
+    } finally {
+      setIsGenerating(false);
+    }
   };
 
   useEffect(() => {
