@@ -59,14 +59,18 @@ export const Landing: React.FC = () => {
         </div>
 
         {/* Headline */}
-        <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight text-white mb-6 leading-tight max-w-4xl">
-          Meet <span className="bg-gradient-to-r from-cyan-400 to-violet-400 bg-clip-text text-transparent glow-text-cyan">Saarthi AI</span>
-          <br />Your Personal Agentic Companion
+        <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight text-white mb-4 leading-none max-w-4xl">
+          <span className="bg-gradient-to-r from-cyan-400 to-violet-400 bg-clip-text text-transparent glow-text-cyan">Saarthi AI</span>
         </h1>
+        
+        {/* Subtitle */}
+        <h2 className="text-2xl md:text-4xl font-bold tracking-tight text-slate-100 mb-6 max-w-3xl">
+          Your Personal Agentic Companion
+        </h2>
 
         {/* Tagline */}
         <p className="text-slate-400 text-sm md:text-base max-w-2xl mb-10 leading-relaxed font-medium">
-          A customizable, state-of-the-art visual companion powered by the **Manas Engine**. Connect study managers, write syntax-highlighted code structures, compile schedules, and orchestrate dedicated agents.
+          Powered by the Manas Engine and Saarthi Agents. Build study syllabus tracks, construct modular code blocks, map checklist planners, and organize your daily workflows seamlessly.
         </p>
 
         {/* Call to Actions */}
@@ -74,23 +78,23 @@ export const Landing: React.FC = () => {
           {isAuthenticated ? (
             <Link
               to="/dashboard"
-              className="flex items-center space-x-2 bg-cyan-500 hover:bg-cyan-600 text-white font-bold text-sm px-8 py-3 rounded-2xl w-full sm:w-auto justify-center transition-all duration-300 glow-cyan hover:scale-105"
+              className="flex items-center space-x-2 bg-cyan-500 hover:bg-cyan-600 text-white font-bold text-sm px-8 py-3.5 rounded-2xl w-full sm:w-auto justify-center transition-all duration-300 glow-cyan hover:scale-105 no-underline"
             >
-              <span>Go to Dashboard</span>
+              <span>Launch Companion</span>
               <ArrowRight className="w-4 h-4" />
             </Link>
           ) : (
             <>
               <Link
                 to="/signup"
-                className="flex items-center space-x-2 bg-gradient-to-r from-cyan-500 to-cyan-600 hover:from-cyan-600 hover:to-cyan-700 text-white font-bold text-sm px-8 py-3.5 rounded-2xl w-full sm:w-auto justify-center transition-all duration-300 glow-cyan hover:scale-105"
+                className="flex items-center space-x-2 bg-gradient-to-r from-cyan-500 to-cyan-600 hover:from-cyan-600 hover:to-cyan-700 text-white font-bold text-sm px-8 py-3.5 rounded-2xl w-full sm:w-auto justify-center transition-all duration-300 glow-cyan hover:scale-105 no-underline"
               >
                 <span>Launch Companion</span>
                 <ArrowRight className="w-4 h-4" />
               </Link>
               <Link
                 to="/login"
-                className="bg-slate-900/60 border border-white/10 hover:border-white/20 text-white font-bold text-sm px-8 py-3.5 rounded-2xl w-full sm:w-auto text-center backdrop-blur-md transition-all hover:bg-slate-900"
+                className="bg-slate-900/60 border border-white/10 hover:border-white/20 text-white font-bold text-sm px-8 py-3.5 rounded-2xl w-full sm:w-auto text-center backdrop-blur-md transition-all hover:bg-slate-900 no-underline"
               >
                 Sign In
               </Link>
@@ -114,7 +118,7 @@ export const Landing: React.FC = () => {
               return (
                 <div 
                   key={feat.title}
-                  className="glass-card p-6 rounded-2xl hover:border-cyan-500/25 transition-all duration-300 group"
+                  className="glass-card glass-card-hover p-6 rounded-2xl group border border-white/5"
                 >
                   <div className={`p-3 rounded-xl border w-fit mb-4 text-cyan-400 ${feat.color} group-hover:scale-110 transition-transform`}>
                     <Icon className="w-5 h-5" />
@@ -130,13 +134,14 @@ export const Landing: React.FC = () => {
       </main>
 
       {/* Footer */}
-      <footer className="border-t border-white/5 py-8 text-center text-xs text-slate-500 relative z-10 bg-slate-950/80">
-        <div className="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
-          <div className="flex items-center space-x-1.5">
-            <span className="font-semibold text-slate-400">Saarthi AI</span>
-            <span>© {new Date().getFullYear()}</span>
-          </div>
-          <p className="font-medium text-[11px]">Your Personal Digital Companion Powered by Manas Engine</p>
+      <footer className="border-t border-white/5 py-10 text-center text-slate-500 relative z-10 bg-slate-950/80 w-full">
+        <div className="max-w-6xl mx-auto px-6 flex flex-col items-center justify-center space-y-2">
+          <p className="text-xs font-semibold text-slate-400">
+            Saarthi AI &copy; 2026
+          </p>
+          <p className="font-medium text-[11px] text-slate-500">
+            Your Personal Digital Companion Powered by Manas Engine
+          </p>
         </div>
       </footer>
     </div>

@@ -11,7 +11,7 @@ export const Navbar: React.FC = () => {
       <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
         
         {/* Logo */}
-        <Link to="/" className="flex items-center space-x-3 group">
+        <Link to="/" className="flex items-center space-x-3 group no-underline">
           <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-cyan-500 to-violet-500 flex items-center justify-center glow-cyan group-hover:scale-105 transition-all duration-300">
             <Terminal className="w-5 h-5 text-white" />
           </div>
@@ -25,7 +25,7 @@ export const Navbar: React.FC = () => {
         <div className="flex items-center space-x-6">
           <Link 
             to="/" 
-            className="text-slate-300 hover:text-white font-medium text-sm transition-colors"
+            className="text-slate-300 hover:text-white font-medium text-sm transition-colors no-underline"
           >
             Vision
           </Link>
@@ -33,7 +33,7 @@ export const Navbar: React.FC = () => {
             href="https://github.com" 
             target="_blank" 
             rel="noreferrer" 
-            className="text-slate-300 hover:text-white font-medium text-sm transition-colors"
+            className="text-slate-300 hover:text-white font-medium text-sm transition-colors no-underline"
           >
             Docs
           </a>
@@ -42,14 +42,14 @@ export const Navbar: React.FC = () => {
             <div className="flex items-center space-x-4">
               <Link 
                 to="/dashboard" 
-                className="flex items-center space-x-1.5 text-xs px-3.5 py-1.5 rounded-lg bg-cyan-950/40 text-cyan-400 border border-cyan-800/30 hover:bg-cyan-500 hover:text-white transition-all"
+                className="flex items-center space-x-1.5 text-xs px-3.5 py-1.5 rounded-lg bg-cyan-950/40 text-cyan-400 border border-cyan-800/30 hover:bg-cyan-500 hover:text-white transition-all no-underline"
               >
                 <Shield className="w-3.5 h-3.5" />
                 <span>Dashboard</span>
               </Link>
               <button
                 onClick={logout}
-                className="text-slate-400 hover:text-white text-xs font-semibold"
+                className="text-slate-400 hover:text-white text-xs font-semibold cursor-pointer"
               >
                 Log Out
               </button>
@@ -58,13 +58,13 @@ export const Navbar: React.FC = () => {
             <div className="flex items-center space-x-3">
               <Link 
                 to="/login" 
-                className="text-slate-300 hover:text-white font-medium text-sm px-4 py-1.5 rounded-lg transition-colors"
+                className="text-slate-300 hover:text-white font-medium text-sm px-4 py-1.5 rounded-lg transition-colors no-underline"
               >
                 Sign In
               </Link>
               <Link 
                 to="/signup" 
-                className="text-xs bg-cyan-500 hover:bg-cyan-600 text-white font-bold px-4 py-2 rounded-lg transition-all glow-cyan hover:scale-105"
+                className="text-xs bg-cyan-500 hover:bg-cyan-600 text-white font-bold px-4 py-2 rounded-lg transition-all glow-cyan hover:scale-105 no-underline flex items-center justify-center"
               >
                 Start Free
               </Link>

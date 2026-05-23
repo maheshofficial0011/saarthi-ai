@@ -73,7 +73,7 @@ export const Settings: React.FC = () => {
         </header>
 
         {/* Content Body */}
-        <main className="flex-grow p-8 max-w-4xl mx-auto w-full space-y-8">
+        <main className="flex-grow p-8 pt-12 max-w-4xl mx-auto w-full space-y-8">
           
           <div className="mb-6">
             <h2 className="text-2xl font-extrabold tracking-tight text-white">Cognitive Control Room</h2>

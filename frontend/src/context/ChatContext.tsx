@@ -308,7 +308,7 @@ As **Saarthi AI**, I am always active to support your workflow. Under Phase 1 fo
 
 You can toggle between them using the **Agent Bar** on the left. If you need coding assist, switch to the **Coding Agent**! If you want visual lists, the **Task Agent** is custom built for checklists.
 
-*Manas Memory engine status:* **${settings.memoryEnabled ? 'Active' : 'Disabled'}**
+Manas Memory Engine Status: ${settings.memoryEnabled ? 'Active' : 'Disabled'}
 Let me know how you'd like to proceed!`;
         break;
     }

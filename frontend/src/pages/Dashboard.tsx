@@ -84,7 +84,7 @@ export const Dashboard: React.FC = () => {
         </header>
 
         {/* Content Body */}
-        <main className="flex-grow p-8 max-w-6xl mx-auto w-full space-y-8">
+        <main className="flex-grow p-8 pt-12 max-w-6xl mx-auto w-full space-y-8">
           
           {/* Welcome Area */}
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
@@ -125,7 +125,7 @@ export const Dashboard: React.FC = () => {
               icon={Cpu}
             />
             <DashboardCard
-              title="Manas Memory slots"
+              title="Manas Memory Slots"
               description="Saved persistent user facts"
               value={settings.memoryEnabled ? '14 slots active' : 'Disabled'}
               badgeText={settings.memoryEnabled ? 'Enabled' : 'Off'}
@@ -135,7 +135,7 @@ export const Dashboard: React.FC = () => {
             <DashboardCard
               title="Collaborative Agents"
               description="Connected specialized helpers"
-              value="7 nodes ready"
+              value="7 Agents Ready"
               badgeText="Operational"
               badgeType="success"
               icon={Users}
